@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client'
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+// CONTEXT
+import { InventarioProvider } from './context/InventarioProvider'
+
 // COMPONENTS
 import Layout from './components/Layout'
 import Index from './pages/Index'
@@ -27,6 +30,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <InventarioProvider>
+      <RouterProvider router={router} />
+    </InventarioProvider>
   </React.StrictMode>,
 )
