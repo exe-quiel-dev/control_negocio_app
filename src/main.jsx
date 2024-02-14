@@ -28,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/proveedores',
         element: <Proveedores />
+      },
+      {
+        path: '/pedidos',
+        element: <Proveedores />
       }
     ]
   }

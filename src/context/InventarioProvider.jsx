@@ -5,10 +5,14 @@ const InventarioContext = createContext();
 
 const InventarioProvider = ({children}) => {
 
+const prueba = () => {
+  console.log('hola')
+}
+
   return(
     <InventarioContext.Provider
       value={{
-        
+        prueba
       }}
     >
       {children}
