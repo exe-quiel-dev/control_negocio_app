@@ -26,7 +26,7 @@ const Index = () => {
         </Link>
         <Link
           className="bg-emerald-100 hover:bg-emerald-300 hover:shadow-md w-3/4 h-1/3 flex flex-col items-center justify-center gap-4 rounded cursor-pointer hover:border-2 hover:border-emerald-400 text-gray-800 hover:text-emerald-100"
-          to='/'
+          to='/proveedores'
         >
           <FaTruck className="text-8xl" />
           <h2 className="uppercase font-black text-2xl">Proveedores</h2>

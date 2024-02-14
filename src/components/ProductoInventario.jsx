@@ -13,7 +13,7 @@ const ProductoInventario = ({ producto }) => {
 
 
   return (
-    <div className="bg-gray-100 text-gray-700 w-full flex justify-around items-center rounded-lg p-5">
+    <div className="bg-gray-100 text-gray-700 w-full flex justify-around items-center rounded-lg p-5 shadow">
       <h2 className="font-black text-2xl">{nombre}</h2>
       <p className="text-xl"><span className="font-bold">Modelo:</span> {modelo}</p>
       <p className="text-xl"><span className="font-bold">Cantidad:</span> {cantidad}</p>

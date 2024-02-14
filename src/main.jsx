@@ -10,6 +10,7 @@ import { InventarioProvider } from './context/InventarioProvider'
 import Layout from './components/Layout'
 import Index from './pages/Index'
 import Inventario from './pages/Inventario'
+import Proveedores from './pages/Proveedores'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/inventario',
         element: <Inventario />
+      },
+      {
+        path: '/proveedores',
+        element: <Proveedores />
       }
     ]
   }
