@@ -1,18 +1,26 @@
 /* eslint-disable react/prop-types */
 import { createContext } from "react";
+//
+import { useState } from "react";
+// import { useLocation } from "react-router-dom";
 
 const InventarioContext = createContext();
 
 const InventarioProvider = ({children}) => {
+  const [modal, setModal] = useState(false);
 
-const prueba = () => {
-  console.log('hola')
-}
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    console.log('enviando info')
+  }
 
   return(
     <InventarioContext.Provider
       value={{
-        prueba
+        modal,
+        setModal,
+        handleSubmit
       }}
     >
       {children}
