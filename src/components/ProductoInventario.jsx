@@ -21,8 +21,8 @@ const ProductoInventario = ({ producto }) => {
         <p className="text-xl">Cantidad: {cantidad}</p>
         <p className="text-lg py-2">Descripcion: {info || '-'}</p>
         <div className="flex gap-4 justify-center py-2">
-          <button className="bg-green-500 text-white rounded-full shadow hover:bg-green-700"><CiCirclePlus className="text-3xl" /></button>
-          <button className="bg-red-500 text-white rounded-full shadow hover:bg-red-700"><CiCircleMinus className="text-3xl" /></button>
+          <button className="bg-green-500 text-white rounded-full shadow hover:bg-green-700 cursor-pointer"><CiCirclePlus className="text-3xl" /></button>
+          <button className="bg-red-500 text-white rounded-full shadow hover:bg-red-700 cursor-pointer"><CiCircleMinus className="text-3xl" /></button>
         </div>
         <p className="text-xl py-2 font-bold">Precio: {formatearDinero(precio)}</p>
       </div>

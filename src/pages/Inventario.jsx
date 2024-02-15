@@ -13,8 +13,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 const Inventario = () => {
   const [selected, setSelected] = useState(false);
 
-  const {modal, setModal, handleSubmit} = useInventario(); 
-  
+  const { handleChangeModal, handleSubmit } = useInventario();
+
   return (
     <main className="flex flex-col items-center justify-center container mx-auto gap-4 p-5">
       <div id="top" className='flex justify-start w-full'>
@@ -29,14 +29,14 @@ const Inventario = () => {
         </div>
       </div>
       <div id='contenedor_form' className='container mx-auto flex flex-col md:flex-row justify-around items-center gap-4'>
-        <form 
+        <form
           className='w-full flex justify-around md:inline'
-          onSubmit={e => {handleSubmit(e)}}
+          onSubmit={e => { handleSubmit(e) }}
         >
           <input
             type='search'
             placeholder='Buscar producto'
-            className='text-gray-700 w-full md:w-1/2 lg:w-1/2 p-2 border-2 border-gray-300 rounded outline-none me-4'
+            className={`text-gray-700 w-full md:w-1/2 lg:w-1/2 p-2 border-2 rounded outline-none me-4 ${selected ? 'border-emerald-300' : 'border-gray-300'}`}
             onFocus={() => { setSelected(true) }}
             onBlur={() => { setSelected(false) }}
           />
@@ -47,9 +47,9 @@ const Inventario = () => {
           />
         </form>
         <div id='boton_agregar' className='w-full flex justify-center md:justify-end'>
-          <button 
+          <button
             className='text-gray-700 bg-emerald-100 hover:bg-emerald-300 cursor-pointer hover:shadow p-2 rounded-lg'
-            onClick={() => {setModal(!modal)}}  
+            onClick={() => { handleChangeModal() }}
           >Nuevo producto</button>
         </div>
       </div>

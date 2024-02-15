@@ -8,19 +8,33 @@ const InventarioContext = createContext();
 
 const InventarioProvider = ({children}) => {
   const [modal, setModal] = useState(false);
+  const [producto, setProducto] = useState({});
+  const [productos, setProductos] = useState([]);
 
 
+console.log(producto)
   const handleSubmit = e => {
     e.preventDefault()
     console.log('enviando info')
+  }
+
+  const handleChangeModal = () => {
+    setModal(!modal)
+  }
+
+  const handleSubmitNuevoProd = e => {
+    e.preventDefault()
+    setProductos([...productos, producto])
   }
 
   return(
     <InventarioContext.Provider
       value={{
         modal,
-        setModal,
-        handleSubmit
+        handleChangeModal,
+        handleSubmit,
+        handleSubmitNuevoProd,
+        setProducto
       }}
     >
       {children}
