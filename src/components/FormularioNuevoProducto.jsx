@@ -8,10 +8,11 @@ import { useState } from "react";
 import Error from "./Error";
 
 const FormularioNuevoProducto = () => {
-  const [nombre, setNombre] = useState('');
-  const [cantidad, setCantidad] = useState(0);
-  const [precio, setPrecio] = useState(0);
-  const [descripcion, setDescripcion] = useState('');
+  const [nombre, setNombre] = useState("");
+  const [cantidad, setCantidad] = useState(Number(0));
+  const [precio, setPrecio] = useState(Number(0));
+  const [descripcion, setDescripcion] = useState("");
+  const [id, setId] = useState(null);
   const [error, setError] = useState(false);
 
   const {
@@ -30,7 +31,8 @@ const FormularioNuevoProducto = () => {
       nombre,
       cantidad,
       precio,
-      descripcion
+      descripcion,
+      id
     }
 
     if ([nombre, cantidad, precio, descripcion].includes('')) {
@@ -38,10 +40,11 @@ const FormularioNuevoProducto = () => {
       setTimeout(() => {
         setError(false)
       }, 3000);
+      return
     } else {
       setError(!error)
       setProductos([...productos, objProducto])
-      localStorage.setItem()
+      console.log(objProducto)
       setModal(!modal)
     }
   }
@@ -68,7 +71,7 @@ const FormularioNuevoProducto = () => {
           id="nombre_producto"
           name="nombre_producto"
           className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
-          value={nombre}
+          value={nombre || ''}
           onChange={e => setNombre(e.target.value)}
         />
 
@@ -78,7 +81,7 @@ const FormularioNuevoProducto = () => {
           id="cantidad"
           name="cantidad"
           className="text w-full-md:lg p-2 outline-none rounded-lg w-full md:w-1/2"
-          value={cantidad}
+          value={cantidad || ''}
           onChange={e => setCantidad(e.target.value)}
         />
 
@@ -88,8 +91,18 @@ const FormularioNuevoProducto = () => {
           id="precio"
           name="precio"
           className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
-          value={precio}
+          value={precio || ''}
           onChange={e => setPrecio(e.target.value)}
+        />
+
+<label htmlFor="id" className="text-gray-300 pt-2 text-start">ID del producto</label>
+        <input
+          type="number"
+          id="id"
+          name="id"
+          className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
+          value={id || ''}
+          onChange={e => setId(e.target.value)}
         />
 
         <label htmlFor="descripcion" className="text-gray-300 pt-2 text-start">Descripcion del producto</label>
@@ -98,7 +111,7 @@ const FormularioNuevoProducto = () => {
           name="descripcion"
           className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
           maxLength={100}
-          value={descripcion}
+          value={descripcion || ''}
           onChange={e => setDescripcion(e.target.value)}
         ></textarea>
 

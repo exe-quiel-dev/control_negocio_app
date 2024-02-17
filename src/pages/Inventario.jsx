@@ -17,20 +17,7 @@ const Inventario = () => {
 
   useEffect(() => {
     localStorage.setItem('productos', JSON.stringify(productos))
-  },[productos])
-
-  const renderInventario = () => {
-    if (productos?.length > 0) {
-      return productos?.map(producto => (<ProductoInventario key={producto.id} producto={producto} />))
-    }else{
-      return <h2 className='text-white font-bold text-xl text-center col-span-3 p-10'>Todavia no hay productos</h2>
-    }
-  }
-
-  // useEffect (() => {
-  //   // renderInventario()
-  //   console.log(productos)
-  // }, [productos])
+  }, [productos])
 
 
   return (
@@ -72,7 +59,10 @@ const Inventario = () => {
         </div>
       </div>
       <div id="productos" className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {renderInventario()}
+
+        {productos?.length ? productos.map(producto => (<ProductoInventario key={producto.id} producto={producto} />))
+          : (<h2 className='text-white font-bold text-xl text-center col-span-3 p-10'>Todavia no hay productos</h2>)}
+
       </div>
     </main>
   )

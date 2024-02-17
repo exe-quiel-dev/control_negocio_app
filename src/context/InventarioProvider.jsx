@@ -17,11 +17,6 @@ const InventarioProvider = ({ children }) => {
   const productosLS = JSON.parse(localStorage.getItem('productos')) ?? [];
 
   const [modal, setModal] = useState(false);
-  // const [nombre, setNombre] = useState('');
-  // const [cantidad, setCantidad] = useState(0);
-  // const [precio, setPrecio] = useState(0);
-  // const [descripcion, setDescripcion] = useState('');
-  // const [producto, setProducto] = useState({});
   const [productos, setProductos] = useState(productosLS);
 
 
@@ -41,15 +36,6 @@ const InventarioProvider = ({ children }) => {
         modal,
         handleChangeModal,
         handleSubmit,
-        // handleSubmitNuevoProd,
-        // setNombre,
-        // setCantidad,
-        // setDescripcion,
-        // setPrecio,
-        // nombre,
-        // cantidad,
-        // descripcion,
-        // precio,
         productos,
         setProductos,
         setModal

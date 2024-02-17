@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import useInventario from "../hooks/useInventario";
 
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
 
 const ProductoInventario = ({ producto }) => {
-  const { nombre, cantidad, precio, descripcion } = producto
+  const { nombre, cantidad, precio, descripcion, id } = producto;
+  const {productos} = useInventario();
   const [nuevaCantidad, setNuevacantidad] = useState(Number(cantidad));
+
+
 
   const formatearDinero = precio => {
     return precio.toLocaleString('en-US', {
@@ -16,13 +20,17 @@ const ProductoInventario = ({ producto }) => {
     })
   }
 
-  const aumentarCantidad = () => {
-    setNuevacantidad(nuevaCantidad + 1)
+  const aumentarCantidad = id => {
+    const productoFiltrado = productos.find(producto => producto.id == id);
+    productoFiltrado.cantidad = Number(productoFiltrado.cantidad) + Number(1); 
+    console.log(productoFiltrado)
+      setNuevacantidad(productoFiltrado.cantidad)
+    
   }
   const restarCantidad = () => {
     setNuevacantidad(nuevaCantidad - 1)
   }
-
+  
 
   return (
     <div id="info_prod" className="bg-gray-200 text-gray-700 w-full flex flex-col justify-around items-center gap-4 rounded-lg p-5 shadow">
@@ -32,7 +40,7 @@ const ProductoInventario = ({ producto }) => {
         <div className="flex gap-4 justify-center py-2">
           <button
             className="bg-green-500 text-white rounded-full shadow hover:bg-green-700 cursor-pointer"
-            onClick={aumentarCantidad}
+            onClick={() => {aumentarCantidad(id)}}
           ><CiCirclePlus className="text-3xl" /></button>
           <button
             className="bg-red-500 text-white rounded-full shadow hover:bg-red-700 cursor-pointer"
