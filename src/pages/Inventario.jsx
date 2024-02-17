@@ -5,15 +5,31 @@ import useInventario from '../hooks/useInventario'
 import { Link } from 'react-router-dom';
 import ProductoInventario from '../components/ProductoInventario'
 
-import productos from "../constants/ProductosInventario"
+// import productos from "../constants/ProductosInventario"
+
 
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 const Inventario = () => {
   const [selected, setSelected] = useState(false);
+  const { handleChangeModal, handleSubmit, productos } = useInventario();
+  
 
-  const { handleChangeModal, handleSubmit } = useInventario();
+
+  const renderInventario = () => {
+    if (productos?.length > 0) {
+      return productos?.map(producto => (<ProductoInventario key={producto.id} producto={producto} />))
+    }else{
+      return <h2>Agregue productos</h2>
+    }
+  }
+
+  // useEffect (() => {
+  //   // renderInventario()
+  //   console.log(productos)
+  // }, [productos])
+
 
   return (
     <main className="flex flex-col items-center justify-center container mx-auto gap-4 p-5">
@@ -48,15 +64,13 @@ const Inventario = () => {
         </form>
         <div id='boton_agregar' className='w-full flex justify-center md:justify-end'>
           <button
-            className='text-gray-700 bg-emerald-100 hover:bg-emerald-300 cursor-pointer hover:shadow p-2 rounded-lg'
+            className='text-gray-700 bg-emerald-100 hover:bg-emerald-300 cursor-pointer hover:shadow p-2 rounded-lg font-semibold'
             onClick={() => { handleChangeModal() }}
           >Nuevo producto</button>
         </div>
       </div>
-      <div id="productos" className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {productos.map(producto => (
-          <ProductoInventario key={producto.id} producto={producto} />
-        ))}
+      <div id="productos" className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+        {renderInventario()}
       </div>
     </main>
   )
