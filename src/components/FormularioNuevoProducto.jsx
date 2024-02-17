@@ -4,33 +4,28 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 // HOOKS
 import useInventario from "../hooks/useInventario";
 import { useState } from "react";
+// COMPONENTS
+import Error from "./Error";
 
 const FormularioNuevoProducto = () => {
   const [nombre, setNombre] = useState('');
   const [cantidad, setCantidad] = useState(0);
   const [precio, setPrecio] = useState(0);
   const [descripcion, setDescripcion] = useState('');
+  const [error, setError] = useState(false);
 
   const {
-    // handleSubmitNuevoProd,
     handleChangeModal,
     setProductos,
     productos,
     setModal,
     modal,
-    // setNombre,
-    // setCantidad,
-    // setPrecio,
-    // setDescripcion,
-    // nombre,
-    // cantidad,
-    // precio,
-    // descripcion
+
   } = useInventario();
+
 
   const handleSubmitNuevoProd = e => {
     e.preventDefault()
-
     const objProducto = {
       nombre,
       cantidad,
@@ -39,10 +34,14 @@ const FormularioNuevoProducto = () => {
     }
 
     if ([nombre, cantidad, precio, descripcion].includes('')) {
-      console.log('Hay algun campo vacio')
+      setError(!error)
+      setTimeout(() => {
+        setError(false)
+      }, 3000);
     } else {
-      console.log(objProducto)
+      setError(!error)
       setProductos([...productos, objProducto])
+      localStorage.setItem()
       setModal(!modal)
     }
   }
@@ -56,6 +55,9 @@ const FormularioNuevoProducto = () => {
           onClick={() => { handleChangeModal() }}
         />
       </div>
+      {error && (
+        <Error msg='Tenes que completar todos los campos.'/>
+      )}
       <form
         className="flex flex-col items-center gap-2"
         onSubmit={e => {handleSubmitNuevoProd(e)}}

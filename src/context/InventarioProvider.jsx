@@ -14,13 +14,15 @@ const InventarioContext = createContext();
 // }
 
 const InventarioProvider = ({ children }) => {
+  const productosLS = JSON.parse(localStorage.getItem('productos')) ?? [];
+
   const [modal, setModal] = useState(false);
   // const [nombre, setNombre] = useState('');
   // const [cantidad, setCantidad] = useState(0);
   // const [precio, setPrecio] = useState(0);
   // const [descripcion, setDescripcion] = useState('');
   // const [producto, setProducto] = useState({});
-  const [productos, setProductos] = useState([]);
+  const [productos, setProductos] = useState(productosLS);
 
 
 
@@ -31,8 +33,6 @@ const InventarioProvider = ({ children }) => {
   const handleChangeModal = () => {
     setModal(!modal)
   }
-
-console.log(productos)
  
 
   return (

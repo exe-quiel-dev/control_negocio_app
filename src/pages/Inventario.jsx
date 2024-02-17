@@ -1,5 +1,5 @@
 // HOOKS
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useInventario from '../hooks/useInventario'
 // COMPONENTS
 import { Link } from 'react-router-dom';
@@ -14,14 +14,16 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 const Inventario = () => {
   const [selected, setSelected] = useState(false);
   const { handleChangeModal, handleSubmit, productos } = useInventario();
-  
 
+  useEffect(() => {
+    localStorage.setItem('productos', JSON.stringify(productos))
+  },[productos])
 
   const renderInventario = () => {
     if (productos?.length > 0) {
       return productos?.map(producto => (<ProductoInventario key={producto.id} producto={producto} />))
     }else{
-      return <h2>Agregue productos</h2>
+      return <h2 className='text-white font-bold text-xl text-center col-span-3 p-10'>Todavia no hay productos</h2>
     }
   }
 
@@ -46,7 +48,7 @@ const Inventario = () => {
       </div>
       <div id='contenedor_form' className='container mx-auto flex flex-col md:flex-row justify-around items-center gap-4'>
         <form
-          className='w-full flex justify-around md:inline'
+          className='w-full flex flex-col md:flex-row justify-around md:inline gap-4'
           onSubmit={e => { handleSubmit(e) }}
         >
           <input
