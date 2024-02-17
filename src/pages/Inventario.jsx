@@ -19,6 +19,10 @@ const Inventario = () => {
     localStorage.setItem('productos', JSON.stringify(productos))
   }, [productos])
 
+  useEffect(() => {
+    JSON.parse(localStorage.getItem('productos'))
+  }, [productos])
+
 
   return (
     <main className="flex flex-col items-center justify-center container mx-auto gap-4 p-5">
