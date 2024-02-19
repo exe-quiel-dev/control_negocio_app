@@ -12,18 +12,22 @@ const FormularioNuevoProducto = () => {
   const [cantidad, setCantidad] = useState(Number(0));
   const [precio, setPrecio] = useState(Number(0));
   const [descripcion, setDescripcion] = useState("");
-  const [id, setId] = useState(null);
   const [error, setError] = useState(false);
+
 
   const {
     handleChangeModal,
     setProductos,
     productos,
-    setModal,
-    modal,
 
   } = useInventario();
 
+
+  const generarId = () => {
+    const random = Math.random().toString(32).substring(2);
+    const fecha = Date.now().toString(32);
+    return random + fecha
+  }
 
   const handleSubmitNuevoProd = e => {
     e.preventDefault()
@@ -32,20 +36,18 @@ const FormularioNuevoProducto = () => {
       cantidad,
       precio,
       descripcion,
-      id
+      id: generarId()
     }
-
+    console.log(objProducto.id)
     if ([nombre, cantidad, precio, descripcion].includes('')) {
       setError(!error)
       setTimeout(() => {
         setError(false)
       }, 3000);
-      return
+      return;
     } else {
-      setError(!error)
       setProductos([...productos, objProducto])
-      console.log(objProducto)
-      setModal(!modal)
+      handleChangeModal()
     }
   }
 
@@ -59,11 +61,13 @@ const FormularioNuevoProducto = () => {
         />
       </div>
       {error && (
-        <Error msg='Tenes que completar todos los campos.'/>
+        <Error msg='Tenes que completar todos los campos.' />
       )}
       <form
         className="flex flex-col items-center gap-2"
-        onSubmit={e => {handleSubmitNuevoProd(e)}}
+        onSubmit={e => {
+          handleSubmitNuevoProd(e)
+        }}
       >
         <label htmlFor="nombre_producto" className="text-gray-300 pt-2 text-start">Nombre del producto</label>
         <input
@@ -95,15 +99,6 @@ const FormularioNuevoProducto = () => {
           onChange={e => setPrecio(e.target.value)}
         />
 
-<label htmlFor="id" className="text-gray-300 pt-2 text-start">ID del producto</label>
-        <input
-          type="number"
-          id="id"
-          name="id"
-          className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
-          value={id || ''}
-          onChange={e => setId(e.target.value)}
-        />
 
         <label htmlFor="descripcion" className="text-gray-300 pt-2 text-start">Descripcion del producto</label>
         <textarea

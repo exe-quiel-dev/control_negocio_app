@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useInventario from "../hooks/useInventario";
 
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
@@ -11,7 +12,7 @@ const ProductoInventario = ({ producto }) => {
   const { productos } = useInventario();
   const [nuevaCantidad, setNuevacantidad] = useState(Number(cantidad));
 
-
+  const navigate = useNavigate();
 
   const formatearDinero = precio => {
     return precio.toLocaleString('en-US', {
@@ -22,7 +23,7 @@ const ProductoInventario = ({ producto }) => {
 
   const aumentarCantidad = id => {
     productos.map(producto => {
-      if(producto.id === id) {
+      if (producto.id === id) {
         producto.cantidad = parseInt(producto.cantidad) + 1;
         setNuevacantidad(producto.cantidad)
         console.log(producto)
@@ -33,8 +34,8 @@ const ProductoInventario = ({ producto }) => {
   }
   const restarCantidad = id => {
     productos.map(producto => {
-      if(producto.id === id) {
-        if(producto.cantidad > 1) {
+      if (producto.id === id) {
+        if (producto.cantidad > 1) {
           producto.cantidad = parseInt(producto.cantidad) - 1;
           setNuevacantidad(producto.cantidad)
           console.log(producto)
@@ -67,7 +68,10 @@ const ProductoInventario = ({ producto }) => {
       </div>
       <div id="editar_eliminar" className="flex justify-center gap-4">
         <FaRegTrashAlt className="text-2xl hover:text-red-500 cursor-pointer" />
-        <GoPencil className="text-2xl hover:text-blue-500 cursor-pointer" />
+        <GoPencil
+          className="text-2xl hover:text-blue-500 cursor-pointer"
+          onClick={() => navigate(`/producto/${id}/editar`)}
+        />
       </div>
     </div>
   )

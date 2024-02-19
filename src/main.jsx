@@ -8,9 +8,11 @@ import { InventarioProvider } from './context/InventarioProvider'
 
 // COMPONENTS
 import Layout from './components/Layout'
+// PAGES
 import Index from './pages/Index'
 import Inventario from './pages/Inventario'
 import Proveedores from './pages/Proveedores'
+import EditarProducto, {loader as editarProductoLoader} from './pages/EditarProducto'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,11 @@ const router = createBrowserRouter([
       {
         path: '/pedidos',
         element: <Proveedores />
+      },
+      {
+        path: '/producto/:productoId/editar',
+        loader: editarProductoLoader,
+        element: <EditarProducto />
       }
     ]
   }

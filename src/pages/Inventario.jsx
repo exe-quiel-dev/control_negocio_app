@@ -13,7 +13,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Inventario = () => {
   const [selected, setSelected] = useState(false);
-  const { handleChangeModal, handleSubmit, productos } = useInventario();
+  const { handleChangeModal, handleFiltrar, productos } = useInventario();
 
   useEffect(() => {
     localStorage.setItem('productos', JSON.stringify(productos))
@@ -40,7 +40,7 @@ const Inventario = () => {
       <div id='contenedor_form' className='container mx-auto flex flex-col md:flex-row justify-around items-center gap-4'>
         <form
           className='w-full flex flex-col md:flex-row justify-around md:inline gap-4'
-          onSubmit={e => { handleSubmit(e) }}
+          onSubmit={e => { handleFiltrar(e) }}
         >
           <input
             type='search'

@@ -6,13 +6,6 @@ import { useState } from "react";
 
 const InventarioContext = createContext();
 
-// const productoVacio = {
-//   nombre: '',
-//   cantidad: '',
-//   precio: '',
-//   descripcion: '',
-// }
-
 const InventarioProvider = ({ children }) => {
   const productosLS = JSON.parse(localStorage.getItem('productos')) ?? [];
 
@@ -20,25 +13,25 @@ const InventarioProvider = ({ children }) => {
   const [productos, setProductos] = useState(productosLS);
 
 
-
-  const handleSubmit = e => {
+  const handleFiltrar = e => {
     e.preventDefault()
-  }
+    console.log('Filtrando')
+}
 
   const handleChangeModal = () => {
     setModal(!modal)
   }
- 
+
 
   return (
     <InventarioContext.Provider
       value={{
         modal,
         handleChangeModal,
-        handleSubmit,
+        handleFiltrar,
         productos,
         setProductos,
-        setModal
+        setModal,
       }}
     >
       {children}
