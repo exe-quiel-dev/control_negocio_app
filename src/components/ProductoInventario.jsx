@@ -26,7 +26,6 @@ const ProductoInventario = ({ producto }) => {
       if (producto.id === id) {
         producto.cantidad = parseInt(producto.cantidad) + 1;
         setNuevacantidad(producto.cantidad)
-        console.log(producto)
         localStorage.setItem('productos', JSON.stringify(productos))
       }
     })
@@ -38,7 +37,6 @@ const ProductoInventario = ({ producto }) => {
         if (producto.cantidad > 1) {
           producto.cantidad = parseInt(producto.cantidad) - 1;
           setNuevacantidad(producto.cantidad)
-          console.log(producto)
           localStorage.setItem('productos', JSON.stringify(productos))
         } else {
           return
