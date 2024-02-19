@@ -9,7 +9,7 @@ import { GoPencil } from "react-icons/go";
 
 const ProductoInventario = ({ producto }) => {
   const { nombre, cantidad, precio, descripcion, id } = producto;
-  const { productos } = useInventario();
+  const { productos, setProductos } = useInventario();
   const [nuevaCantidad, setNuevacantidad] = useState(Number(cantidad));
 
   const navigate = useNavigate();
@@ -45,6 +45,12 @@ const ProductoInventario = ({ producto }) => {
     })
   }
 
+  const eliminarProducto = (e, id) => {
+    e.preventDefault()
+    const productoEliminado = productos.filter(producto => producto.id !== id);
+    setProductos(productoEliminado)
+  }
+
 
   return (
     <div id="info_prod" className="bg-gray-200 text-gray-700 w-full flex flex-col justify-around items-center gap-4 rounded-lg p-5 shadow">
@@ -65,7 +71,9 @@ const ProductoInventario = ({ producto }) => {
         <p className="text-xl py-2 font-bold">Precio: {formatearDinero(Number(precio))}</p>
       </div>
       <div id="editar_eliminar" className="flex justify-center gap-4">
-        <FaRegTrashAlt className="text-2xl hover:text-red-500 cursor-pointer" />
+        <FaRegTrashAlt className="text-2xl hover:text-red-500 cursor-pointer" 
+        onClick={e => { eliminarProducto(e, id)}}
+        />
         <GoPencil
           className="text-2xl hover:text-blue-500 cursor-pointer"
           onClick={() => navigate(`/producto/${id}/editar`)}

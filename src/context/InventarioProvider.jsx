@@ -13,11 +13,6 @@ const InventarioProvider = ({ children }) => {
   const [productos, setProductos] = useState(productosLS);
 
 
-  const handleFiltrar = e => {
-    e.preventDefault()
-    console.log('Filtrando')
-}
-
   const handleChangeModal = () => {
     setModal(!modal)
   }
@@ -28,7 +23,6 @@ const InventarioProvider = ({ children }) => {
       value={{
         modal,
         handleChangeModal,
-        handleFiltrar,
         productos,
         setProductos,
         setModal,

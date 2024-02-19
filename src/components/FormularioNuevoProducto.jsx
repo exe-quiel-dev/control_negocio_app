@@ -32,13 +32,13 @@ const FormularioNuevoProducto = () => {
   const handleSubmitNuevoProd = e => {
     e.preventDefault()
     const objProducto = {
-      nombre,
+      nombre: nombre.toLowerCase(),
       cantidad,
       precio,
       descripcion,
       id: generarId()
     }
-    console.log(objProducto.id)
+    
     if ([nombre, cantidad, precio, descripcion].includes('')) {
       setError(!error)
       setTimeout(() => {
