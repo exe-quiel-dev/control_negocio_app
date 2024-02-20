@@ -1,10 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 // HOOKS
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useInventario from "../hooks/useInventario";
 // COMPONENTS
 import { Link } from "react-router-dom";
+import Alerta from "../components/Alerta";
 // ICONS
 import { IoMdArrowRoundBack } from "react-icons/io";
 
@@ -17,9 +18,11 @@ const EditarProducto = () => {
   const [cantidadActualizado, setCantidadActualizado] = useState(0);
   const [precioActualizado, setPrecioActualizado] = useState(0);
   const [descripcionActualizado, setDescripcionActualizado] = useState('');
+  const [alerta, setAlerta] = useState('');
 
   const { productos } = useInventario();
   const datos = useLoaderData();
+  const navigate = useNavigate();
 
   const prodFiltrado = productos.filter(producto => producto.id === datos.productoId);
 
@@ -31,17 +34,30 @@ const EditarProducto = () => {
     prodFiltrado[0].descripcion = descripcionActualizado
 
     localStorage.setItem('productos', JSON.stringify(productos))
+    setAlerta('success')
+    setTimeout(() => {
+      setAlerta('')
+      navigate('/inventario')
+    }, 3000);
   }
 
   return (
-    <main>
-      <Link
-        className='text-gray-500 flex items-center gap-2 hover:text-white cursor-pointer hover:drop-shadow'
-        to='/'
-      >
-        <IoMdArrowRoundBack className='text-2xl' />
-        <span className='text-lg font-semibold uppercase'>Volver</span>
-      </Link>
+    <main className="flex flex-col items-center justify-center container mx-auto gap-4 p-5">
+      <div id="top" className='flex justify-start w-full'>
+        <div className='p-2 rounded-lg'>
+          <Link
+            className='text-gray-500 flex items-center  hover:text-white cursor-pointer hover:drop-shadow'
+            to='/inventario'
+          >
+            <IoMdArrowRoundBack className='text-2xl' />
+            <span className='text-lg font-semibold uppercase'>Volver</span>
+          </Link>
+        </div>
+      </div>
+
+      {alerta && (
+        <Alerta msg={`${alerta === 'error' ? 'Tenes que completar todos los campos.' : 'Producto guardado con exito.'}`} tipo={alerta} />
+      )}
 
       <form
         className="flex flex-col items-center gap-2 p-2 lg:p-0 md:container md:mx-auto"
@@ -49,7 +65,7 @@ const EditarProducto = () => {
           handleEditarProducto(e)
         }}
       >
-        <label htmlFor="nombre_producto" className="text-gray-300 pt-2 text-start">Nombre del producto</label>
+        <label htmlFor="nombre_producto" className="text-gray-300 text-start">Nombre del producto</label>
         <input
           type="text"
           id="nombre_producto"
@@ -59,7 +75,7 @@ const EditarProducto = () => {
           onChange={e => { setNombreActualizado(e.target.value) }}
         />
 
-        <label htmlFor="cantidad" className="text-gray-300 w-full-md:4 pt-2 text-start">Cantidad de productos</label>
+        <label htmlFor="cantidad" className="text-gray-300 w-full-md:4 text-start">Cantidad de productos</label>
         <input
           type="number"
           id="cantidad"
@@ -69,7 +85,7 @@ const EditarProducto = () => {
           onChange={e => { setCantidadActualizado(e.target.value) }}
         />
 
-        <label htmlFor="precio" className="text-gray-300 pt-2 text-start">Precio del producto</label>
+        <label htmlFor="precio" className="text-gray-300 text-start">Precio del producto</label>
         <input
           type="number"
           id="precio"
@@ -80,7 +96,7 @@ const EditarProducto = () => {
         />
 
 
-        <label htmlFor="descripcion" className="text-gray-300 pt-2 text-start">Descripcion del producto</label>
+        <label htmlFor="descripcion" className="text-gray-300 text-start">Descripcion del producto</label>
         <textarea
           id="descripcion"
           name="descripcion"

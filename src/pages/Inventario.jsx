@@ -16,7 +16,7 @@ const Inventario = () => {
   const [filtrar, setFiltrar] = useState(false);
   const { handleChangeModal, productos } = useInventario();
 
-  let prodsFiltrar = [];
+  // let prodsFiltrar = [];
 
   useEffect(() => {
     localStorage.setItem('productos', JSON.stringify(productos))
@@ -27,22 +27,12 @@ const Inventario = () => {
   }, [productos])
 
   const handleFiltrar = busqueda => {
-    // productos.map(producto => {
-    //   if (producto.nombre.includes(busqueda)) {
-    //     prodsFiltrar = [...prodsFiltrar, producto]
-    //     console.log(prodsFiltrar)
-    //   }
-    // })
-    productos.filter(producto => {
-      producto.nombre.includes(busqueda)
-      prodsFiltrar = [...prodsFiltrar, producto]
-      console.log(prodsFiltrar)
-    })
+   console.log('filtrando', busqueda, filtrar)
   }
-  const renderProductos = () => {
-    productos?.length ? productos.map(producto => (<ProductoInventario key={producto.id} producto={producto} />))
-      : (<h2 className='text-white font-bold text-xl text-center col-span-3 p-10'>Todavia no hay productos.</h2>)
-  }
+  // const renderProductos = () => {
+  //   productos?.length ? productos.map(producto => (<ProductoInventario key={producto.id} producto={producto} />))
+  //     : (<h2 className='text-white font-bold text-xl text-center col-span-3 p-10'>Todavia no hay productos.</h2>)
+  // }
   // const renderProductosFiltrados = () => {
 
   // }

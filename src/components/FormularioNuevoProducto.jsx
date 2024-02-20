@@ -5,21 +5,20 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import useInventario from "../hooks/useInventario";
 import { useState } from "react";
 // COMPONENTS
-import Error from "./Error";
+import Alerta from "./Alerta";
 
 const FormularioNuevoProducto = () => {
   const [nombre, setNombre] = useState("");
   const [cantidad, setCantidad] = useState(Number(0));
   const [precio, setPrecio] = useState(Number(0));
   const [descripcion, setDescripcion] = useState("");
-  const [error, setError] = useState(false);
+  const [alerta, setAlerta] = useState('');
 
 
   const {
     handleChangeModal,
     setProductos,
     productos,
-
   } = useInventario();
 
 
@@ -29,82 +28,94 @@ const FormularioNuevoProducto = () => {
     return random + fecha
   }
 
+  class Producto {
+    constructor(nombre, cantidad, precio, descripcion) {
+      this.nombre = nombre.toLowerCase();
+      this.cantidad = cantidad;
+      this.precio = precio;
+      this.descripcion = descripcion;
+      this.id = generarId();
+    }
+
+
+  }
+
   const handleSubmitNuevoProd = e => {
     e.preventDefault()
-    const objProducto = {
-      nombre: nombre.toLowerCase(),
-      cantidad,
-      precio,
-      descripcion,
-      id: generarId()
-    }
-    
+
+    const nuevoProducto = new Producto(nombre, cantidad, precio, descripcion);
+
     if ([nombre, cantidad, precio, descripcion].includes('')) {
-      setError(!error)
+      setAlerta('error')
       setTimeout(() => {
-        setError(false)
+        setAlerta('')
       }, 3000);
+
       return;
     } else {
-      setProductos([...productos, objProducto])
-      handleChangeModal()
+      setProductos([...productos, nuevoProducto])
+      setAlerta('success')
+      setTimeout(() => {
+        setAlerta('')
+        handleChangeModal()
+      }, 3000);
     }
   }
 
 
   return (
-    <>
-      <div className="flex items-center justify-end">
-        <IoIosCloseCircleOutline
-          className="bg-red-500 text-white rounded-full shadow hover:bg-red-700 text-2xl text-center cursor-pointer"
-          onClick={() => { handleChangeModal() }}
-        />
+    <div className="flex flex-col items-center justify-center container mx-auto">
+      <div className="w-2/3">
+          <IoIosCloseCircleOutline
+            className="text-white rounded-full shadow hover:bg-red-500 text-2xl text-center cursor-pointer mb-2"
+            onClick={() => { handleChangeModal() }}
+          />
       </div>
-      {error && (
-        <Error msg='Tenes que completar todos los campos.' />
+      {alerta && (
+        <Alerta msg={`${alerta === 'error' ? 'Tenes que completar todos los campos.' : 'Producto guardado con exito.'}`} tipo={alerta} />
       )}
       <form
-        className="flex flex-col items-center gap-2"
+        className="flex flex-col items-center gap-4 w-2/3"
         onSubmit={e => {
           handleSubmitNuevoProd(e)
         }}
       >
-        <label htmlFor="nombre_producto" className="text-gray-300 pt-2 text-start">Nombre del producto</label>
+        <label htmlFor="nombre_producto" className="text-gray-300 w-full text-start">Nombre del producto</label>
         <input
           type="text"
           id="nombre_producto"
           name="nombre_producto"
-          className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
+          className="text-lg p-2 outline-none rounded-lg w-full"
           value={nombre || ''}
           onChange={e => setNombre(e.target.value)}
         />
 
-        <label htmlFor="cantidad" className="text-gray-300 w-full-md:4 pt-2 text-start">Cantidad de productos</label>
+        <label htmlFor="cantidad" className="text-gray-300 w-full text-start">Cantidad de productos</label>
         <input
           type="number"
           id="cantidad"
           name="cantidad"
-          className="text w-full-md:lg p-2 outline-none rounded-lg w-full md:w-1/2"
+          className="text w-full-md:lg p-2 outline-none rounded-lg w-full"
           value={cantidad || ''}
           onChange={e => setCantidad(e.target.value)}
         />
 
-        <label htmlFor="precio" className="text-gray-300 pt-2 text-start">Precio del producto</label>
+        <label htmlFor="precio" className="text-gray-300 w-full text-start">Precio del producto</label>
         <input
           type="number"
           id="precio"
           name="precio"
-          className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
+          className="text-lg p-2 outline-none rounded-lg w-full"
           value={precio || ''}
           onChange={e => setPrecio(e.target.value)}
         />
 
 
-        <label htmlFor="descripcion" className="text-gray-300 pt-2 text-start">Descripcion del producto</label>
+        <label htmlFor="descripcion" className="text-gray-300 w-full text-start">Descripcion del producto</label>
         <textarea
           id="descripcion"
           name="descripcion"
-          className="text-lg p-2 outline-none rounded-lg w-full md:w-1/2"
+          className="text-lg p-2 outline-none rounded-lg w-full"
           maxLength={100}
           value={descripcion || ''}
           onChange={e => setDescripcion(e.target.value)}
@@ -116,7 +127,7 @@ const FormularioNuevoProducto = () => {
           className='uppercase p-2 font-bold bg-emerald-100 rounded-lg px-4 hover:shadow hover:bg-emerald-300 cursor-pointer text-gray-700'
         />
       </form>
-    </>
+    </div>
   )
 }
 

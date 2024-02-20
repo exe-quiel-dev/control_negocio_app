@@ -7,16 +7,20 @@ import FormularioNuevoProducto from "./FormularioNuevoProducto";
 
 
 const Layout = () => {
-  const {modal} = useInventario();
+  const { modal } = useInventario();
   let location = useLocation();
 
   const eliminarSlash = () => {
     let path = location.pathname;
-    if (location.pathname === '/') {
+    if (path === '/') {
       return 'Inicio'
     } else {
-      path = path[0] == '/' ? path.substring(1) : path;
-      return path
+      if (path.includes('producto')) {
+        return 'Editar Producto'
+      } else {
+        path = path[0] == '/' ? path.substring(1) : path;
+        return path
+      }
     }
   }
   eliminarSlash()
@@ -43,15 +47,15 @@ const Layout = () => {
         <h2 className="text-xl uppercase font-semibold text-center">{eliminarSlash()}</h2>
       </nav>
       <Outlet />
-    
-    {modal && (
-      <Modal
-        isOpen={modal}
-        style={customStyles}
-      >
-        <FormularioNuevoProducto />
-      </Modal>
-    )}
+
+      {modal && (
+        <Modal
+          isOpen={modal}
+          style={customStyles}
+        >
+          <FormularioNuevoProducto />
+        </Modal>
+      )}
     </>
   )
 }
