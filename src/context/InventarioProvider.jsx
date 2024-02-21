@@ -17,7 +17,18 @@ const InventarioProvider = ({ children }) => {
     setModal(!modal)
   }
 
+  const generarId = () => {
+    const random = Math.random().toString(32).substring(2);
+    const fecha = Date.now().toString(32);
+    return random + fecha
+  }
 
+  const formatearDinero = precio => {
+    return precio.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    })
+  }
 
   return (
     <InventarioContext.Provider
@@ -27,6 +38,8 @@ const InventarioProvider = ({ children }) => {
         productos,
         setProductos,
         setModal,
+        generarId,
+        formatearDinero
       }}
     >
       {children}

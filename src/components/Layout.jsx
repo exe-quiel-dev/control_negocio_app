@@ -10,7 +10,7 @@ const Layout = () => {
   const { modal } = useInventario();
   let location = useLocation();
 
-  const eliminarSlash = () => {
+  const pathname = () => {
     let path = location.pathname;
     if (path === '/') {
       return 'Inicio'
@@ -23,7 +23,7 @@ const Layout = () => {
       }
     }
   }
-  eliminarSlash()
+  pathname()
 
   const customStyles = {
     content: {
@@ -44,7 +44,7 @@ const Layout = () => {
     <>
       <nav className="p-2 bg-emerald-400 text-white shadow">
         <h1 className="font-black text-3xl text-center">STOCK APP | BY EXE DEV</h1>
-        <h2 className="text-xl uppercase font-semibold text-center">{eliminarSlash()}</h2>
+        <h2 className="text-xl uppercase font-semibold text-center">{pathname()}</h2>
       </nav>
       <Outlet />
 

@@ -9,17 +9,10 @@ import { GoPencil } from "react-icons/go";
 
 const ProductoInventario = ({ producto }) => {
   const { nombre, cantidad, precio, descripcion, id } = producto;
-  const { productos, setProductos } = useInventario();
+  const { productos, setProductos, formatearDinero } = useInventario();
   const [nuevaCantidad, setNuevacantidad] = useState(Number(cantidad));
 
   const navigate = useNavigate();
-
-  const formatearDinero = precio => {
-    return precio.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    })
-  }
 
   const aumentarCantidad = id => {
     productos.map(producto => {

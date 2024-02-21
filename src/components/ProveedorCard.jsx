@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
+// HOOKS
+import useInventario from "../hooks/useInventario";
 
 const ProveedorCard = ({datos}) => {
   const {nombre, saldo, pagado, total} = datos;
 
-  const formatearDinero = precio => {
-    return precio.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    })
-  }
+  const { formatearDinero } = useInventario();
+
+
 
   return (
     <div id="info_proveedor" className="bg-gray-200 text-gray-700 w-1/2 shadow flex flex-col justify-around items-center rounded-lg p-5">

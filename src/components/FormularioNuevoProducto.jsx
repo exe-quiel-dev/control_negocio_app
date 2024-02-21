@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// ICONS
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 // HOOKS
@@ -19,14 +20,9 @@ const FormularioNuevoProducto = () => {
     handleChangeModal,
     setProductos,
     productos,
+    generarId
   } = useInventario();
 
-
-  const generarId = () => {
-    const random = Math.random().toString(32).substring(2);
-    const fecha = Date.now().toString(32);
-    return random + fecha
-  }
 
   class Producto {
     constructor(nombre, cantidad, precio, descripcion) {
@@ -49,7 +45,7 @@ const FormularioNuevoProducto = () => {
       setAlerta('error')
       setTimeout(() => {
         setAlerta('')
-      }, 3000);
+      }, 1500);
 
       return;
     } else {
@@ -58,7 +54,7 @@ const FormularioNuevoProducto = () => {
       setTimeout(() => {
         setAlerta('')
         handleChangeModal()
-      }, 3000);
+      }, 1500);
     }
   }
 

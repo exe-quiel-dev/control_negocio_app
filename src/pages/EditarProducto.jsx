@@ -14,20 +14,23 @@ export function loader({ params }) {
 }
 
 const EditarProducto = () => {
-  const [nombreActualizado, setNombreActualizado] = useState('');
-  const [cantidadActualizado, setCantidadActualizado] = useState(0);
-  const [precioActualizado, setPrecioActualizado] = useState(0);
-  const [descripcionActualizado, setDescripcionActualizado] = useState('');
-  const [alerta, setAlerta] = useState('');
-
   const { productos } = useInventario();
   const datos = useLoaderData();
+  const prodFiltrado = productos.filter(producto => producto.id === datos.productoId);
+  const {nombre, cantidad, precio, descripcion} = prodFiltrado[0];
+
+  const [nombreActualizado, setNombreActualizado] = useState(nombre);
+  const [cantidadActualizado, setCantidadActualizado] = useState(cantidad);
+  const [precioActualizado, setPrecioActualizado] = useState(precio);
+  const [descripcionActualizado, setDescripcionActualizado] = useState(descripcion);
+  const [alerta, setAlerta] = useState('');
+
   const navigate = useNavigate();
 
-  const prodFiltrado = productos.filter(producto => producto.id === datos.productoId);
 
   const handleEditarProducto = e => {
     e.preventDefault()
+    
     prodFiltrado[0].nombre = nombreActualizado
     prodFiltrado[0].cantidad = cantidadActualizado
     prodFiltrado[0].precio = precioActualizado
@@ -38,7 +41,7 @@ const EditarProducto = () => {
     setTimeout(() => {
       setAlerta('')
       navigate('/inventario')
-    }, 3000);
+    }, 1500);
   }
 
   return (

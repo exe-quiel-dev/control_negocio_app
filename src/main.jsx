@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // CONTEXT
 import { InventarioProvider } from './context/InventarioProvider'
+import { ProveedorProvider } from './context/ProveedorProvider'
 
 // COMPONENTS
 import Layout from './components/Layout'
@@ -47,7 +48,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <InventarioProvider>
+      <ProveedorProvider>
       <RouterProvider router={router} />
+      </ProveedorProvider>
     </InventarioProvider>
   </React.StrictMode>,
 )

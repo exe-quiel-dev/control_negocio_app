@@ -1,13 +1,26 @@
+// HOOKS
+import useProveedor from "../hooks/useProveedor";
+import { useEffect } from "react";
+
 // COMPONENTS
 import { Link } from "react-router-dom";
-import ProveedorCard from "../components/ProveedorCard"
+import ProveedorCard from "../components/ProveedorCard";
 
 // ICONS
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-import { proveedores } from "../constants/Proveedores"
 
 const Proveedores = () => {
+  const { provs } = useProveedor();
+
+  useEffect(() => {
+    localStorage.setItem('productos', JSON.stringify(provs))
+  }, [provs])
+
+  useEffect(() => {
+    JSON.parse(localStorage.getItem('provs'))
+  }, [provs])
+
   return (
     <main className="flex flex-col items-center justify-center container mx-auto gap-4 p-5">
       <div className='flex justify-start w-full'>
@@ -21,9 +34,8 @@ const Proveedores = () => {
           </Link>
         </div>
       </div>
-      {proveedores.map(proveedor => (
-        <ProveedorCard key={proveedor.id} datos={proveedor} />
-      ))}
+      {provs?.length ? provs.map(proveedor => (<ProveedorCard key={proveedor.id} datos={proveedor} />))
+        : (<h2 className='text-white font-bold text-xl text-center col-span-3 p-10'>Todavia no hay proveedores agregados.</h2>)}
     </main>
   )
 }
