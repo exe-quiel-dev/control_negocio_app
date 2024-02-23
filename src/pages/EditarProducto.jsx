@@ -16,6 +16,8 @@ export function loader({ params }) {
 const EditarProducto = () => {
   const { productos } = useInventario();
   const datos = useLoaderData();
+  const navigate = useNavigate();
+  
   const prodFiltrado = productos.filter(producto => producto.id === datos.productoId);
   const {nombre, cantidad, precio, descripcion} = prodFiltrado[0];
 
@@ -25,7 +27,6 @@ const EditarProducto = () => {
   const [descripcionActualizado, setDescripcionActualizado] = useState(descripcion);
   const [alerta, setAlerta] = useState('');
 
-  const navigate = useNavigate();
 
 
   const handleEditarProducto = e => {
