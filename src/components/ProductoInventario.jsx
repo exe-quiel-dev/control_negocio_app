@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+// HOOKS
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useInventario from "../hooks/useInventario";
-
+// ICONS
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";

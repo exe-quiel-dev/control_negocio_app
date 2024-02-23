@@ -4,6 +4,7 @@ import useInventario from "../hooks/useInventario";
 // COMPONENTS
 import Modal from "react-modal";
 import FormularioNuevoProducto from "./FormularioNuevoProducto";
+import FormulanioNuevoProveedor from "./FormularioNuevoProveedor";
 
 
 const Layout = () => {
@@ -14,13 +15,16 @@ const Layout = () => {
     let path = location.pathname;
     if (path === '/') {
       return 'Inicio'
+    }
+    if (path.includes('producto')) {
+      return 'Editar Producto'
+    }
+
+    if (path.includes('proveedor')) {
+      return 'Editar proveedor'
     } else {
-      if (path.includes('producto')) {
-        return 'Editar Producto'
-      } else {
-        path = path[0] == '/' ? path.substring(1) : path;
-        return path
-      }
+      path = path[0] == '/' ? path.substring(1) : path;
+      return path
     }
   }
   pathname()
@@ -40,6 +44,28 @@ const Layout = () => {
   };
   Modal.setAppElement('#root');
 
+  const renderModal = () => {
+    if (modal === 'inventario') {
+      return (
+        <Modal
+          isOpen={modal}
+          style={customStyles}
+        >
+          <FormularioNuevoProducto />
+        </Modal>
+      )
+    } else if (modal === 'proveedor') {
+      return (
+        <Modal
+          isOpen={modal}
+          style={customStyles}
+        >
+          <FormulanioNuevoProveedor />
+        </Modal>
+      )
+    }
+  }
+
   return (
     <>
       <nav className="p-2 bg-emerald-400 text-white shadow">
@@ -48,14 +74,7 @@ const Layout = () => {
       </nav>
       <Outlet />
 
-      {modal && (
-        <Modal
-          isOpen={modal}
-          style={customStyles}
-        >
-          <FormularioNuevoProducto />
-        </Modal>
-      )}
+      {modal && renderModal()}
     </>
   )
 }

@@ -13,7 +13,7 @@ const FormularioNuevoProducto = () => {
   const [cantidad, setCantidad] = useState(Number(0));
   const [precio, setPrecio] = useState(Number(0));
   const [descripcion, setDescripcion] = useState("");
-  const [alerta, setAlerta] = useState('');
+  const [alerta, setAlerta] = useState(false);
 
 
   const {
@@ -42,17 +42,17 @@ const FormularioNuevoProducto = () => {
     const nuevoProducto = new Producto(nombre, cantidad, precio, descripcion);
 
     if ([nombre, cantidad, precio, descripcion].includes('')) {
-      setAlerta('error')
+      setAlerta(!alerta)
       setTimeout(() => {
-        setAlerta('')
+        setAlerta(!alerta)
       }, 1500);
 
       return;
     } else {
       setProductos([...productos, nuevoProducto])
-      setAlerta('success')
+      setAlerta(!alerta)
       setTimeout(() => {
-        setAlerta('')
+        setAlerta(!alerta)
         handleChangeModal()
       }, 1500);
     }

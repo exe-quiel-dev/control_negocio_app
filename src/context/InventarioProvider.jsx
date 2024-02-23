@@ -10,11 +10,11 @@ const InventarioProvider = ({ children }) => {
 
   const productosLS = JSON.parse(localStorage.getItem('productos')) ?? [];
 
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(null);
   const [productos, setProductos] = useState(productosLS);
 
-  const handleChangeModal = () => {
-    setModal(!modal)
+  const handleChangeModalInventario = () => {
+    setModal('inventario')
   }
 
   const generarId = () => {
@@ -23,8 +23,8 @@ const InventarioProvider = ({ children }) => {
     return random + fecha
   }
 
-  const formatearDinero = precio => {
-    return precio.toLocaleString('en-US', {
+  const formatearDinero = num => {
+    return num.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD'
     })
@@ -34,7 +34,7 @@ const InventarioProvider = ({ children }) => {
     <InventarioContext.Provider
       value={{
         modal,
-        handleChangeModal,
+        handleChangeModalInventario,
         productos,
         setProductos,
         setModal,

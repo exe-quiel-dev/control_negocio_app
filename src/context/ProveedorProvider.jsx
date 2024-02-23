@@ -2,6 +2,7 @@
 import { createContext } from "react";
 // HOOKS
 import { useState } from "react";
+import useInventario from "../hooks/useInventario";
 
 const ProveedorContext = createContext();
 
@@ -10,11 +11,21 @@ const ProveedorProvider = ({ children }) => {
 
   const [provs, setProvs] = useState(proveedoresLS);
 
+  const { setModal, modal } = useInventario();
+
+  const handleChangeModalProveedor = () => {
+    setModal('proveedor')
+    if(modal === 'proveedor') {
+      setModal(null)
+    }
+  }
+
   return (
     <ProveedorContext.Provider
       value={{
         provs,
-        setProvs
+        setProvs,
+        handleChangeModalProveedor
       }}
     >
       {children}
