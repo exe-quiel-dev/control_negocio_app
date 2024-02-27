@@ -1,10 +1,11 @@
-import { Outlet, useLocation } from "react-router-dom"
+import { Link, Outlet, useLocation } from "react-router-dom"
 // HOOKS
 import useInventario from "../hooks/useInventario";
 // COMPONENTS
 import Modal from "react-modal";
 import FormularioNuevoProducto from "./FormularioNuevoProducto";
 import FormulanioNuevoProveedor from "./FormularioNuevoProveedor";
+import FormularioNuevoPedido from "./FormularioNuevoPedido";
 
 
 const Layout = () => {
@@ -48,19 +49,30 @@ const Layout = () => {
     if (modal === 'inventario') {
       return (
         <Modal
-          isOpen={modal}
+          isOpen={true}
           style={customStyles}
         >
           <FormularioNuevoProducto />
         </Modal>
       )
-    } else if (modal === 'proveedor') {
+    }
+    if (modal === 'proveedor') {
       return (
         <Modal
-          isOpen={modal}
+          isOpen={true}
           style={customStyles}
         >
           <FormulanioNuevoProveedor />
+        </Modal>
+      )
+    }
+    if (modal === 'pedido') {
+      return (
+        <Modal
+          isOpen={true}
+          style={customStyles}
+        >
+          <FormularioNuevoPedido />
         </Modal>
       )
     }
@@ -69,7 +81,7 @@ const Layout = () => {
   return (
     <>
       <nav className="p-2 bg-emerald-400 text-white shadow">
-        <h1 className="font-black text-3xl text-center">STOCK APP | BY EXE DEV</h1>
+        <Link to='/'> <h1 className="font-black text-3xl text-center">STOCK APP | BY EXE DEV</h1> </Link>
         <h2 className="text-xl uppercase font-semibold text-center">{pathname()}</h2>
       </nav>
       <Outlet />

@@ -6,15 +6,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 // CONTEXT
 import { InventarioProvider } from './context/InventarioProvider'
 import { ProveedorProvider } from './context/ProveedorProvider'
-
+import { PedidosProvider } from './context/PedidosProvider'
 // COMPONENTS
 import Layout from './components/Layout'
 // PAGES
 import Index from './pages/Index'
 import Inventario from './pages/Inventario'
 import Proveedores from './pages/Proveedores'
-import EditarProducto, {loader as editarProductoLoader} from './pages/EditarProducto'
-import EditarProveedor, {loader as editarProveedorLoader} from './pages/EditarProveedor'
+import EditarProducto, { loader as editarProductoLoader } from './pages/EditarProducto'
+import EditarProveedor, { loader as editarProveedorLoader } from './pages/EditarProveedor'
+import Pedidos from './pages/Pedidos'
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/pedidos',
-        element: <Proveedores />
+        element: <Pedidos />
       },
       {
         path: '/producto/:productoId/editar',
@@ -55,7 +56,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <InventarioProvider>
       <ProveedorProvider>
-      <RouterProvider router={router} />
+        <PedidosProvider>
+          <RouterProvider router={router} />
+        </PedidosProvider>
       </ProveedorProvider>
     </InventarioProvider>
   </React.StrictMode>,
