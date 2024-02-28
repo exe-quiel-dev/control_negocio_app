@@ -20,7 +20,7 @@ const PedidosCard = ({ datos }) => {
   }
 
   return (
-    <div id="info_proveedor" className="bg-gray-200 text-gray-700 w-1/2 shadow flex flex-col justify-around items-center rounded-lg p-5 gap-4 text-center">
+    <div id="info_proveedor" className="bg-gray-200 text-gray-700 w-full md:w-1/2 shadow flex flex-col justify-around items-center rounded-lg p-5 gap-4 text-center">
       <h2 className="font-black text-2xl uppercase">{nombre}</h2>
       <p className="text-xl"><span className="font-bold">Pedido:</span> {pedido}</p>
       <p className="text-xl"><span className="font-bold">Pagado:</span> {formatearDinero(Number(pagado))}</p>

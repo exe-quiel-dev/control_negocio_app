@@ -42,7 +42,7 @@ const FormularioNuevoProducto = () => {
     const nuevoProducto = new Producto(nombre, cantidad, precio, descripcion);
 
     if ([nombre, cantidad, precio, descripcion].includes('')) {
-      setAlerta(!alerta)
+      setAlerta('error')
       setTimeout(() => {
         setAlerta(!alerta)
       }, 1500);
@@ -50,10 +50,10 @@ const FormularioNuevoProducto = () => {
       return;
     } else {
       setProductos([...productos, nuevoProducto])
-      setAlerta(!alerta)
+      setAlerta('success')
       setTimeout(() => {
-        setAlerta(!alerta)
-        handleChangeModal()
+        setAlerta('')
+        handleChangeModal(null)
       }, 1500);
     }
   }
