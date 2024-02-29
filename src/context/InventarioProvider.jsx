@@ -15,6 +15,9 @@ const InventarioProvider = ({ children }) => {
 
   const handleChangeModalInventario = () => {
     setModal('inventario')
+    if(modal === 'inventario') {
+      setModal(null)
+    }
   }
 
   const generarId = () => {

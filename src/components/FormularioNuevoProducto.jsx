@@ -17,7 +17,7 @@ const FormularioNuevoProducto = () => {
 
 
   const {
-    handleChangeModal,
+    handleChangeModalInventario,
     setProductos,
     productos,
     generarId
@@ -44,7 +44,7 @@ const FormularioNuevoProducto = () => {
     if ([nombre, cantidad, precio, descripcion].includes('')) {
       setAlerta('error')
       setTimeout(() => {
-        setAlerta(!alerta)
+        setAlerta('')
       }, 1500);
 
       return;
@@ -53,7 +53,7 @@ const FormularioNuevoProducto = () => {
       setAlerta('success')
       setTimeout(() => {
         setAlerta('')
-        handleChangeModal(null)
+        handleChangeModalInventario(null)
       }, 1500);
     }
   }
@@ -64,7 +64,7 @@ const FormularioNuevoProducto = () => {
       <div className="w-2/3">
           <IoIosCloseCircleOutline
             className="text-white rounded-full shadow hover:bg-red-500 text-2xl text-center cursor-pointer mb-2"
-            onClick={() => { handleChangeModal() }}
+            onClick={() => { handleChangeModalInventario() }}
           />
       </div>
       {alerta && (
