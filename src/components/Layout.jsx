@@ -84,7 +84,7 @@ const Layout = () => {
   return (
     <>
       <nav className="p-2 bg-emerald-400 text-white shadow">
-        <Link to='/'> <h1 className="font-black text-3xl text-center">STOCK APP | BY EXE DEV</h1> </Link>
+        <Link to='/'> <h1 className="font-black text-3xl text-center">CONTROL NEGOCIO | BY EXE DEV</h1> </Link>
         <h2 className="text-xl uppercase font-semibold text-center">{pathname()}</h2>
       </nav>
       <Outlet />
