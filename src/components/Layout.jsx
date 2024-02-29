@@ -23,6 +23,9 @@ const Layout = () => {
 
     if (path.includes('proveedor')) {
       return 'Editar proveedor'
+    } 
+    if (path.includes('pedido')) {
+      return 'Editar Pedido'
     } else {
       path = path[0] == '/' ? path.substring(1) : path;
       return path

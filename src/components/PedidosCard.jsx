@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 // HOOKS
+import { useNavigate } from "react-router-dom";
 import useInventario from "../hooks/useInventario";
 import usePedidos from "../hooks/usePedidos";
 // ICONS
@@ -9,6 +10,7 @@ import { GoPencil } from "react-icons/go";
 
 const PedidosCard = ({ datos }) => {
   const { nombre, saldo, pagado, pedido, id } = datos;
+  const navigate = useNavigate();
 
   const { formatearDinero } = useInventario();
   const { pedidos, setPedidos } = usePedidos();
@@ -31,7 +33,7 @@ const PedidosCard = ({ datos }) => {
         />
         <GoPencil
           className="text-2xl hover:text-blue-500 cursor-pointer"
-        // onClick={() => navigate(`/pedido/${id}/editar`)}
+        onClick={() => navigate(`/pedido/${id}/editar`)}
         />
       </div>
     </div>

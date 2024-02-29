@@ -16,7 +16,7 @@ import Proveedores from './pages/Proveedores'
 import Pedidos from './pages/Pedidos'
 import EditarProducto, { loader as editarProductoLoader } from './pages/EditarProducto'
 import EditarProveedor, { loader as editarProveedorLoader } from './pages/EditarProveedor'
-import EditarPedido from './pages/EditarPedido'
+import EditarPedido, {loader as editarPedidoLoader} from './pages/EditarPedido'
 
 const router = createBrowserRouter([
   {
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/pedido/:pedidoId/editar',
-        loader: editarProveedorLoader,
+        loader: editarPedidoLoader,
         element: <EditarPedido />
       }
     ]

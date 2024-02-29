@@ -1,5 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
 // HOOKS
-import { useState } from "react" 
+import { useState } from "react"
 import { useLoaderData, useNavigate } from "react-router-dom";
 import usePedidos from "../hooks/usePedidos";
 // COMPONENTS
@@ -8,23 +9,38 @@ import Alerta from "../components/Alerta";
 // ICONS
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-export function loader ({params}) {
+export function loader({ params }) {
   return params;
 }
 
 const EditarPedido = () => {
-  const {pedidos} = usePedidos();
+  const { pedidos } = usePedidos();
   const datos = useLoaderData();
   const navigate = useNavigate();
 
-  const pedidoFiltrado = pedidos.filter(pedido => pedido.id === datos.proveedorId);
-  const { nombre, saldo, pagado } = pedidoFiltrado[0];
+  const pedidoFiltrado = pedidos.filter(pedido => pedido.id === datos.pedidoId);
+  const { nombre, saldo, pagado, pedido } = pedidoFiltrado[0];
 
   const [nombreActualizado, setNombreActualizado] = useState(nombre);
   const [pagadoActualizado, setPagadoActualizado] = useState(pagado);
   const [saldoActualizado, setSaldoActualizado] = useState(saldo);
+  const [pedidoActualizado, setPeddidoActualizado] = useState(pedido);
   const [alerta, setAlerta] = useState('');
 
+  const handleEditarPedido = e => {
+    e.preventDefault()
+    pedidoFiltrado[0].nombre = nombreActualizado
+    pedidoFiltrado[0].pagado = pagadoActualizado
+    pedidoFiltrado[0].saldo = saldoActualizado
+    pedidoFiltrado[0].pedido = pedidoActualizado
+
+    localStorage.setItem('provs', JSON.stringify(pedidos))
+    setAlerta('success')
+    setTimeout(() => {
+      setAlerta('')
+      navigate('/pedidos')
+    }, 1500);
+  }
 
   return (
     <main className="flex flex-col items-center justify-center container mx-auto gap-4 p-5">
@@ -32,7 +48,7 @@ const EditarPedido = () => {
         <div className='p-2 rounded-lg'>
           <Link
             className='text-gray-500 flex items-center  hover:text-white cursor-pointer hover:drop-shadow'
-            to='/inventario'
+            to='/pedidos'
           >
             <IoMdArrowRoundBack className='text-2xl' />
             <span className='text-lg font-semibold uppercase'>Volver</span>
@@ -47,7 +63,7 @@ const EditarPedido = () => {
       <form
         className="flex flex-col items-center gap-2 p-2 lg:p-0 md:container md:mx-auto"
         onSubmit={e => {
-          handdleEditarProveedor(e)
+          handleEditarPedido(e)
         }}
       >
         <label htmlFor="nombre_proveedor" className="text-gray-300 text-start">Nombre del proveedor</label>
@@ -79,6 +95,16 @@ const EditarPedido = () => {
           defaultValue={pedidoFiltrado[0]?.saldo}
           onChange={e => { setSaldoActualizado(e.target.value) }}
         />
+
+        <label htmlFor="pedido" className="text-gray-300 w-full text-start">Descripcion del pedido</label>
+        <textarea
+          id="pedido"
+          name="pedido"
+          className="text-lg p-2 outline-none rounded-lg w-full"
+          maxLength={300}
+          value={pedidoActualizado || ''}
+          onChange={e => setPeddidoActualizado(e.target.value)}
+        ></textarea>
 
         <input
           type="submit"
